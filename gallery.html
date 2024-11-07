@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Галерея изображений</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            text-align: center;
+            padding: 50px;
+        }
+        .gallery img {
+            width: 150px;
+            height: 150px;
+            margin: 10px;
+            cursor: pointer;
+            border: 2px solid #ccc;
+        }
+        .gallery img:hover {
+            border-color: #4CAF50;
+        }
+        .enlarged-image {
+            margin-top: 20px;
+            max-width: 500px;
+        }
+        .image {
+            display:flex;
+            align-items: center;
+            width:100%;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>Галерея изображений</h1>
+    <div class="gallery">
+        <img src="https://i.pinimg.com/736x/45/18/dd/4518ddcbdc852c5c0254264a459f6f54.jpg" alt="Image 1" class="thumbnail">
+        <img src="https://www.coachlancer.com/wp-content/uploads/2024/02/FakeJobsEverywhere_thumbnail.jpg" alt="Image 2" class="thumbnail">
+        <img src="https://cloudfront-us-east-2.images.arcpublishing.com/reuters/2KK7SYZAXRJUXAZSIN2OG2PAKY.jpg" alt="Image 3" class="thumbnail">
+    </div>
+    <div class="noob" >
+    <div id="enlarged" class="image"></div>
+    </div>
+    <script>
+        const thumbnails = document.querySelectorAll('.thumbnail');
+        const enlarged = document.getElementById('enlarged');
+
+        thumbnails.forEach(thumbnail => {
+            thumbnail.addEventListener('click', function() {
+                enlarged.innerHTML = `<img src="${thumbnail.src}" alt="${thumbnail.alt}" width="500">`;
+            });
+        });
+    </script>
+</body>
+</html>
