@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Форма с валидацией</title>
+    <style>
+        body {
+            background-color: #f4f4f4;
+            text-align: center;
+        }
+        .error {
+            color: red;
+        }
+        form{
+            width:100%;
+        }
+        input {
+            padding: 8px;
+            margin: 10px;
+            width: 20%;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .error-field {
+            border: 2px solid red;
+        }
+    </style>
+</head>
+<body>
+    <main>
+    <h1>Форма регистрации</h1>
+    <form id="registrationForm">
+        <div>
+            <label for="name">Имя:</label>
+            <input type="text" id="name" name="name">
+            <div class="error" id="nameError"></div>
+        </div>
+        <div>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email">
+            <div class="error" id="emailError"></div>
+        </div>
+        <div>
+            <label for="password">Пароль:</label>
+            <input type="password" id="password" name="password">
+            <div class="error" id="passwordError"></div>
+        </div>
+        <button type="submit">Отправить</button>
+    </form>
+    </main>
+    <script>
+        document.getElementById('registrationForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            let valid = true;
+            
+            document.getElementById('nameError').textContent = '';
+            document.getElementById('emailError').textContent = '';
+            document.getElementById('passwordError').textContent = '';
+            document.getElementById('name').classList.remove('error-field');
+            document.getElementById('email').classList.remove('error-field');
+            document.getElementById('password').classList.remove('error-field');
+
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+
+            if (name === '') {
+                document.getElementById('nameError').textContent = 'Имя не может быть пустым';
+                document.getElementById('name').classList.add('error-field');
+                valid = false;
+            }
+
+            if (!email.includes('@') || !email.includes('.')) {
+                document.getElementById('emailError').textContent = 'Email должен содержать "@" и "."';
+                document.getElementById('email').classList.add('error-field');
+                valid = false;
+            }
+
+            if (password.length < 8) {
+                document.getElementById('passwordError').textContent = 'Пароль должен содержать минимум 8 символов';
+                document.getElementById('password').classList.add('error-field');
+                valid = false;
+            }
+
+            if (valid) {
+                alert('Форма отправлена');
+            }
+        });
+    </script>
+</body>
+</html>
